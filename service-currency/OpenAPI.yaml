@@ -1,0 +1,40 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /api/v1/get_currency:
+    get:
+      tags:
+        - currency-controller
+      operationId: getAllPriceCurrency
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriceCurrency'
+components:
+  schemas:
+    PriceCurrency:
+      type: object
+      properties:
+        datetime:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+          format: double
